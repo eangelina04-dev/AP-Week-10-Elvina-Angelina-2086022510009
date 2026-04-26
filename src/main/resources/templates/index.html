@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Course Information</h1>
+        <p class="subtitle">Hi, I am Elvina :D. I am a first year college student in Ciputra University. Courses I am currently learning are:</p>
+        <div class="card-container">
+            <div class="card"
+                th:each="course : ${courses}"
+                th:data-name="${course.name}"
+                th:data-desc="${course.description}"
+                th:data-image="${course.image}"
+                onclick="handleClick(this)">
+                <div class="card-content">
+                    <img class="course-img" th:src="${course.image}" alt="Course Image">
+                    <h2 th:text="${course.name}"></h2>
+                    <p class="category" th:text="${course.category}"></p>
+                </div>
+                <button class="detail-btn"
+                        onclick="event.stopPropagation(); showDetailFromElement(this.parentElement)">View Detail
+                </button>
+            </div>
+        </div>
+        <div id="detailBox" class="detail-box hidden">
+            <h2 id="detailTitle"></h2>
+            <p id="detailDesc"></p>
+            <button class="close-btn" onclick="closeDetail()">Close</button>
+        </div>
+        <button class="toggle-btn" onclick="toggleMode()">Dark Mode</button>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>
